@@ -43,37 +43,14 @@ function checkWin() {
     let b3 = document.getElementById("b3").innerHTML;
     let c3 = document.getElementById("c3").innerHTML;
 
-    if (a1 === b1) {
-        if (b1 === c1) {
-            if (a1 === "X") document.getElementById("winner").innerHTML = "X wins";
-            if (a1 === "O") document.getElementById("winner").innerHTML = "O wins";
-        }
-    }
+    if (a1 !== "") { if (a1 === b1) { if (b1 === c1) document.getElementById("winner").innerHTML = a1 + " wins"; } }
+    if (a2 !== "") { if (a2 === b2) { if (b2 === c2) document.getElementById("winner").innerHTML = a2 + " wins"; } }
+    if (a3 !== "") { if (a3 === b3) { if (b3 === c3) document.getElementById("winner").innerHTML = a3 + " wins"; } }
 
-    if (a2 === b2) {
-        if (b2 === c2) {
-            if (a2 === "X") document.getElementById("winner").innerHTML = "X wins";
-            if (a2 === "O") document.getElementById("winner").innerHTML = "O wins";
-        }
-    }
+    if (a1 !== "") { if (a1 === a2) { if (a2 === a3) document.getElementById("winner").innerHTML = a1 + " wins"; } }
+    if (b1 !== "") { if (b1 === b2) { if (b2 === b3) document.getElementById("winner").innerHTML = b1 + " wins"; } }
+    if (c1 !== "") { if (c1 === c2) { if (c2 === c3) document.getElementById("winner").innerHTML = c1 + " wins"; } }
 
-    if (a3 === b3) {
-        if (b3 === c3) {
-            if (a3 === "X") document.getElementById("winner").innerHTML = "X wins";
-            if (a3 === "O") document.getElementById("winner").innerHTML = "O wins";
-        }
-    }
-
-    if (a1 === a2) {
-        if (a2 === a3) {
-            if (a1 === "X") document.getElementById("winner").innerHTML = "X wins";
-            if (a1 === "O") document.getElementById("winner").innerHTML = "O wins";
-        }
-    }
-
-    if (b1 === b2) {
-        if (b2 === b3) {
-            if (b1 === "X") document.getElementById("winner").innerHTML = "X wins";
-        }
-    }
+    if (a1 !== "") { if (a1 === b2) { if (b2 === c3) document.getElementById("winner").innerHTML = a1 + " wins"; } }
+    if (a3 !== "") { if (a3 === b2) { if (b2 === c1) document.getElementById("winner").innerHTML = a3 + " wins"; } }
 }
