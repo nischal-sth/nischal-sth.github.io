@@ -49,7 +49,7 @@ let dataset = [];
             document.getElementById("mean").innerText = "Mean: " + mean;
         }
 
-        // display dataset
+        
         function displayDataset() {
             document.getElementById("dataset").innerText = "Dataset: " + dataset.join(", ");
         }
