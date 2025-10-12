@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minimalist Mastermind</title>
+    <style>
+      input {
+        width: 2ch;
+        font-size: xxx-large;
+        text-align: center;
+      }
+      p {
+        font-size: xxx-large;
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Minimalist Mastermind</h1>
+
+    <div id="guessArea">
+      <input type="text" id="slot1" />
+      <input type="text" id="slot2" />
+      <input type="text" id="slot3" />
+      <input type="text" id="slot4" />
+    </div>
+
+    <br /><button id="guess" onclick="tryGuess()">Try Guess</button><br /><br />
+
+    <div id="pastGuesses"></div>
+
+    <script>
+      let code = [];
+      resetGame();
+
+      function resetGame() {
+        code = [];
+        for (let i = 0; i < 4; i++) code.push(Math.floor(Math.random() * 6) + 1);
+        document.getElementById("pastGuesses").innerHTML = "";
+        for (let i = 1; i <= 4; i++) {
+          let slot = document.getElementById("slot" + i);
+          slot.disabled = false;
+          slot.value = "";
+          slot.style.backgroundColor = "white";
+          slot.style.color = "black";
+        }
+        document.getElementById("guess").innerHTML = "Try Guess";
+        document.getElementById("guess").setAttribute("onclick", "tryGuess()");
+        console.log(code);
+      }
+
+      function clearSlots() {
+        for (let i = 1; i <= 4; i++) {
+          document.getElementById("slot" + i).value = "";
+        }
+      }
+
+      class RuleError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = "RuleError";
+        }
+      }
+
+      function checkInput(slot) {
+        try {
+          const n = Number(slot);
+          if (Number.isNaN(n)) {
+            throw new RuleError("I SAID NUMBERS ONLYYYYY!!!!!");
+          }
+          if (n < 1 || n > 6) {
+            throw new RuleError("Only numbers BETWEEN 1 and 6 PLEASEEEEEEE");
+          }
+          return true;
+        } catch (err) {
+          alert(err.message);
+          return false;
+        }
+      }
+
+      function tryGuess() {
+        let guesses = [];
+        for (let i = 1; i <= 4; i++) {
+          let raw = document.getElementById("slot" + i).value;
+          let slot = parseInt(raw, 10);
+          if (checkInput(slot)) {
+            guesses.push(slot);
+          } else {
+            break;
+          }
+        }
+
+        if (guesses.length === 4) {
+          let correctPosition = 0;
+          let correctColor = 0;
+          const codeCopy = [...code];
+
+          for (let i = 0; i < 4; i++) {
+            if (guesses[i] === codeCopy[i]) {
+              correctPosition++;
+              codeCopy[i] = "-";
+            }
+          }
+
+          for (let i = 0; i < 4; i++) {
+            if (codeCopy.includes(guesses[i])) {
+              correctColor++;
+              codeCopy[codeCopy.indexOf(guesses[i])] = "-";
+            }
+          }
+
+          if (correctPosition === 4) {
+            for (let i = 1; i <= 4; i++) {
+              let slot = document.getElementById("slot" + i);
+              slot.disabled = true;
+              slot.style.backgroundColor = "lime";
+              slot.style.color = "green";
+            }
+            document.getElementById("guess").innerHTML = "Reset Game";
+            document.getElementById("guess").setAttribute("onclick", "resetGame()");
+          } else {
+            let output = "<p>";
+            for (let i = 0; i < 4; i++) {
+              output += '<input disabled value="' + guesses[i] + '">';
+            }
+            for (let i = 0; i < correctPosition; i++) output += "&#9823;";
+            for (let i = 0; i < correctColor; i++) output += "&#9817;";
+            let currentDisplay = document.getElementById("pastGuesses");
+            currentDisplay.innerHTML = output + "</p>" + currentDisplay.innerHTML;
+            clearSlots();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
