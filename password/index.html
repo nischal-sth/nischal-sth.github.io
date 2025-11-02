@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comments Submission Form</title>
+</head>
+<body>
+  <h1>Comments Submission Form</h1>
+
+  <form id="commentForm">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required pattern="[A-Za-z ]+">
+    </div>
+
+    <div>
+      <label for="phone">Phone Number</label>
+      <input id="phone" name="phone" type="tel" required
+             pattern="^(?:\d|\(|\)|\+|-|\s){7,}$">
+    </div>
+
+    <div>
+      <label for="email">Email Address</label>
+      <input id="email" name="email" type="email" required>
+    </div>
+
+    <div>
+      <label for="comment">Comment</label>
+      <textarea id="comment" name="comment" rows="4" cols="40"></textarea>
+    </div>
+
+    <div>
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required>
+      <span id="userFeedback"></span>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required>
+      <span id="passFeedback"></span>
+    </div>
+
+    <button id="submitBtn" type="submit">Submit</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
