@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+#search-bar {
+  margin-bottom: 20px;
+}
+
+.media-item {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.thumbnail {
+  width: 80px;
+  margin-right: 15px;
+}
+
+.media-item h2 {
+  margin: 0;
+}
+
+.media-item p {
+  margin: 0;
+}
